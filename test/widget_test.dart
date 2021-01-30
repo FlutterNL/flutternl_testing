@@ -6,25 +6,63 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutternl_testing/components/category_selector.dart';
+import 'package:flutternl_testing/data/providers.dart';
 
 import 'package:flutternl_testing/main.dart';
+import 'package:flutternl_testing/models/news_item.dart';
+
+const newsTitle = "You wouldn't believe what happened!";
+const newsMessage = "We just made a widget test 💙";
+const newsFilterTitle = 'News';
+
+final testInvoices = [
+  NewsItem(
+    title: newsTitle,
+    message: newsMessage,
+    category: NewsCategory.News,
+  ),
+];
+
+final testNewsProvider = FutureProvider<List<NewsItem>>((ref) async {
+  return testInvoices;
+});
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Test news', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(ProviderScope(
+      overrides: [allNews.overrideWithProvider(testNewsProvider)],
+      child: MyApp(),
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text(newsTitle), findsOneWidget);
+  });
+
+  testWidgets('Test filter', (WidgetTester tester) async {
+    await tester.pumpWidget(ProviderScope(
+      overrides: [allNews.overrideWithProvider(testNewsProvider)],
+      child: MyApp(),
+    ));
+
+    await tester.pump();
+    expect(find.text(newsTitle), findsOneWidget);
+    expect(find.text(newsFilterTitle), findsNothing);
+
+    final filter = find.byKey(filterWidgetKey);
+
+    await tester.tap(filter);
+    await tester.pumpAndSettle();
+
+    expect(find.text(newsFilterTitle), findsOneWidget);
+
+    await tester.tap(find.byKey(ValueKey(FilterOptions.Meetup)));
+    await tester.pump();
+
+    expect(find.text(newsTitle), findsNothing);
   });
 }
