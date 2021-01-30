@@ -14,21 +14,7 @@ import 'package:flutternl_testing/data/providers.dart';
 import 'package:flutternl_testing/main.dart';
 import 'package:flutternl_testing/models/news_item.dart';
 
-const newsTitle = "You wouldn't believe what happened!";
-const newsMessage = "We just made a widget test 💙";
-const newsFilterTitle = 'News';
-
-final testInvoices = [
-  NewsItem(
-    title: newsTitle,
-    message: newsMessage,
-    category: NewsCategory.News,
-  ),
-];
-
-final testNewsProvider = FutureProvider<List<NewsItem>>((ref) async {
-  return testInvoices;
-});
+import 'test_data.dart';
 
 void main() {
   testWidgets('Test news', (WidgetTester tester) async {
