@@ -5,18 +5,21 @@ import 'package:flutternl_testing/models/news_item.dart';
 
 final filterWidgetKey = UniqueKey();
 
-class CategorySelector extends StatelessWidget {
+
+class CategorySelector extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    NewsCategory filter;
+  Widget build(BuildContext context, ScopedReader watch) {
+    FilterOptions filter = watch(newsFilter).state;
 
     return Container(
       width: double.infinity,
       child: PopupMenuButton(
         key: filterWidgetKey,
         initialValue: filter,
-        onSelected: (value) {},
-        itemBuilder: (context) => [null, ...NewsCategory.values]
+        onSelected: (value) {
+          context.read(newsFilter).state = value;
+        },
+        itemBuilder: (context) => FilterOptions.values
             .map((e) => PopupMenuItem(
                 key: ValueKey(e),
                 child: CategorySelectorItem(option: e),
@@ -35,28 +38,28 @@ class CategorySelector extends StatelessWidget {
 }
 
 class CategorySelectorItem extends StatelessWidget {
-  final NewsCategory option;
+  final FilterOptions option;
 
   const CategorySelectorItem({Key key, @required this.option}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var title = "";
-    if (option == null) {
-      title = 'All';
-    } else {
-      switch (option) {
-        case NewsCategory.News:
-          title = 'News';
-          break;
-        case NewsCategory.Meetup:
-          title = 'Meetups';
-          break;
-        case NewsCategory.Announcement:
-          title = 'Announcements';
-          break;
-      }
+    switch (option) {
+      case FilterOptions.News:
+        title = 'News';
+        break;
+      case FilterOptions.Meetup:
+        title = 'Meetups';
+        break;
+      case FilterOptions.Announcement:
+        title = 'Announcements';
+        break;
+      case FilterOptions.All:
+        title = 'All';
+        break;
     }
     return Text(title);
   }
 }
+

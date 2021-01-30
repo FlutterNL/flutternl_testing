@@ -17,3 +17,10 @@ enum NewsCategory {
   Meetup,
   Announcement,
 }
+
+enum FilterOptions{
+  All,
+  News,
+  Meetup,
+  Announcement,
+}

@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutternl_testing/components/error_icon.dart';
 import 'package:flutternl_testing/components/loading_indicator.dart';
 import 'package:flutternl_testing/components/news_widget.dart';
 import 'package:flutternl_testing/data/news_api_client.dart';
+import 'package:flutternl_testing/data/providers.dart';
 import 'package:flutternl_testing/models/news_item.dart';
 
-class NewsList extends StatelessWidget {
+class NewsList extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    return watch(filteredNews).when(
+      data: (newsItems) => _NewsListContent(newsItems: newsItems),
+      loading: () => LoadingIndicator(),
+      error: (error, trace) => ErrorIcon(),
+    );
+  }
+}
+
+class OldNewsList extends StatelessWidget {
   final FlutterNlNewsApiClient _apiClient = FlutterNlNewsApiClient();
 
   @override
@@ -19,10 +32,6 @@ class NewsList extends StatelessWidget {
           if (!snapshot.hasData) {
             return LoadingIndicator();
           }
-          if(snapshot.data.isEmpty){
-            return Center(child: Text('No news'));
-          }
-
           return _NewsListContent(newsItems: snapshot.data);
         });
   }
@@ -35,6 +44,10 @@ class _NewsListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (newsItems.isEmpty) {
+      return Center(child: Text('No news'));
+    }
+
     return ListView.separated(
         itemBuilder: (context, index) => NewsWidget(newsItem: newsItems[index]),
         separatorBuilder: (context, index) => Divider(),
