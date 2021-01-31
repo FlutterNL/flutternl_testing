@@ -9,17 +9,24 @@ class FlutterNlNewsApiClient {
 
 const List<NewsItem> _veryRealNewsItems = <NewsItem>[
   const NewsItem(
-    title: 'Start your engines',
-    message: 'We will show you how to integrate testing in your app.',
+    title: 'Start your testing engines',
+    message: 'We will show you how to integrate widget testing in your app.',
     category: NewsCategory.Meetup,
-    livestream: false,
+    livestream: true,
     breaking: false,
   ),
   const NewsItem(
     title: 'New Flutter NL organizer',
-    message: 'We are happy to announce René joined our organizers group',
+    message: 'We are happy to announce René joined our organizers team',
     category: NewsCategory.Announcement,
     livestream: true,
     breaking: true,
-  )
+  ),
+  const NewsItem(
+    title: "Let's Google Meet again",
+    message: "In March we're hosting another Google Meet meetup with a mystery guest",
+    category: NewsCategory.Meetup,
+    livestream: false,
+    breaking: true,
+  ),
 ];
