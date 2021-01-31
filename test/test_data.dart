@@ -18,3 +18,10 @@ final testNewsMessage = NewsItem(
 final testNewsProvider = FutureProvider<List<NewsItem>>((ref) async {
   return testNewsList;
 });
+
+const testAnnouncementMessage = const NewsItem(
+    title: "This is a test announcement",
+    message: "Testing testing 1, 2 testing 1, 2...",
+    category: NewsCategory.Announcement,
+    livestream: true,
+    breaking: true);
