@@ -11,6 +11,8 @@ final testNewsMessage = NewsItem(
   title: newsTitle,
   message: newsMessage,
   category: NewsCategory.News,
+  livestream: false,
+  breaking: false,
 );
 
 final testNewsProvider = FutureProvider<List<NewsItem>>((ref) async {
