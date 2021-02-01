@@ -9,6 +9,7 @@ class NewsPage extends StatelessWidget {
       child: Column(
         children: [
           CategorySelector(),
+          SizedBox(height: 4.0),
           Expanded(child: NewsList()),
         ],
       ),

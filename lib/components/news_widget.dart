@@ -10,16 +10,32 @@ class NewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.white,
       padding: const EdgeInsets.all(8.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          '${newsItem.category == NewsCategory.Announcement ? '📢 ' : ''}${newsItem.title}',
-          style: Theme.of(context).textTheme.headline5,
-        ),
-        Text(newsItem.message, style: Theme.of(context).textTheme.caption),
-        if (newsItem.livestream || newsItem.breaking) NewsLabelsRow(newsItem: newsItem),
-      ]),
+          Row(
+            children: [
+              Visibility(
+                  visible: newsItem.category == NewsCategory.Announcement,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: Icon(Icons.announcement_rounded, color: Colors.blue),
+                  )),
+              Expanded(
+                child: Text(
+                  newsItem.title,
+                  style: Theme.of(context).textTheme.headline5,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          Text(newsItem.message, style: Theme.of(context).textTheme.caption),
+          if (newsItem.livestream || newsItem.breaking) NewsLabelsRow(newsItem: newsItem),
+        ],
+      ),
     );
   }
 }

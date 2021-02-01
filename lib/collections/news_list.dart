@@ -50,7 +50,7 @@ class _NewsListContent extends StatelessWidget {
 
     return ListView.separated(
         itemBuilder: (context, index) => NewsWidget(newsItem: newsItems[index]),
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => SizedBox(height: 4.0),
         itemCount: newsItems.length);
   }
 }

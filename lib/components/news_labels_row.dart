@@ -19,14 +19,17 @@ class NewsLabelsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         if (newsItem.breaking)
-          Text(
-            'BREAKING',
-            style: labelStyle,
-          ),
-        if (newsItem.livestream && newsItem.breaking)
-          Text(
-            ' 🔹 ',
-            style: labelStyle,
+          Row(
+            children: [
+              Text(
+                'BREAKING',
+                style: labelStyle,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Icon(Icons.new_releases_outlined, size: 12),
+              )
+            ],
           ),
         if (newsItem.livestream)
           Text(
