@@ -25,3 +25,11 @@ const testAnnouncementMessage = const NewsItem(
     category: NewsCategory.Announcement,
     livestream: true,
     breaking: true);
+
+const testMeetupMessage = const NewsItem(
+    title: "This is a meetup news item",
+    message: "Join us next time!",
+    category: NewsCategory.Meetup,
+    livestream: true,
+    breaking: false);
+
