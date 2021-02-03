@@ -10,7 +10,7 @@ final testNewsList = [testNewsMessage];
 final testNewsMessage = NewsItem(
   title: newsTitle,
   message: newsMessage,
-  category: NewsCategory.News,
+  category: NewsCategory.news,
   livestream: false,
   breaking: false,
 );
@@ -22,14 +22,14 @@ final testNewsProvider = FutureProvider<List<NewsItem>>((ref) async {
 const testAnnouncementMessage = const NewsItem(
     title: "This is a test announcement",
     message: "Testing testing 1, 2 testing 1, 2...",
-    category: NewsCategory.Announcement,
+    category: NewsCategory.announcement,
     livestream: true,
     breaking: true);
 
 const testMeetupMessage = const NewsItem(
     title: "This is a meetup news item",
     message: "Join us next time!",
-    category: NewsCategory.Meetup,
+    category: NewsCategory.meetup,
     livestream: true,
     breaking: false);
 

@@ -46,16 +46,16 @@ class CategorySelectorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var title = "";
     switch (option) {
-      case FilterOptions.News:
+      case FilterOptions.news:
         title = 'News';
         break;
-      case FilterOptions.Meetup:
+      case FilterOptions.meetup:
         title = 'Meetups';
         break;
-      case FilterOptions.Announcement:
+      case FilterOptions.announcement:
         title = 'Announcements';
         break;
-      case FilterOptions.All:
+      case FilterOptions.all:
         title = 'All';
         break;
     }

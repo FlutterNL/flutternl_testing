@@ -17,7 +17,7 @@ class NewsWidget extends StatelessWidget {
           Row(
             children: [
               Visibility(
-                  visible: newsItem.category == NewsCategory.Announcement,
+                  visible: newsItem.category == NewsCategory.announcement,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 4.0),
                     child: Icon(Icons.announcement_rounded, color: Colors.blue),

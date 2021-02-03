@@ -46,7 +46,7 @@ void main() {
 
     expect(find.text(newsFilterTitle), findsOneWidget);
 
-    await tester.tap(find.byKey(ValueKey(FilterOptions.Meetup)));
+    await tester.tap(find.byKey(ValueKey(FilterOptions.meetup)));
     await tester.pump();
 
     expect(find.text(newsTitle), findsNothing);

@@ -17,14 +17,14 @@ class NewsItem {
 }
 
 enum NewsCategory {
-  News,
-  Meetup,
-  Announcement,
+  news,
+  meetup,
+  announcement,
 }
 
 enum FilterOptions{
-  All,
-  News,
-  Meetup,
-  Announcement,
+  all,
+  news,
+  meetup,
+  announcement,
 }
